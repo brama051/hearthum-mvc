@@ -1,0 +1,14 @@
+pluginRepositories {
+    maven {
+        url 'http://devhub.ag04.com/nexus/content/repositories/gradle-plugins/'
+    }
+    maven {
+	    url 'https://search.maven.org/'	
+    }
+    gradlePluginPortal()
+}
+
+rootProject.name = 'hearthum'
+
+include 'hearthum-domain'
+include 'hearthum-web'

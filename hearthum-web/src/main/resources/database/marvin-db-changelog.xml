@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <property name="current.timestamp" value="now()" dbms="postgresql" />
+
+
+    <include file="/database/changelogs/marvin-columns-000000-category.xml" />
+    <include file="/database/changelogs/marvin-columns-000100-inventory_item.xml" />
+    <include file="/database/changelogs/marvin-columns-000200-label.xml" />
+
+    <include file="/database/changelogs/marvin-test-000000-category.xml" />
+    <include file="/database/changelogs/marvin-test-000100-inventory_item.xml" />
+    <include file="/database/changelogs/marvin-test-000200-label.xml" />
+
+</databaseChangeLog>

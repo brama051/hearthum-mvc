@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="20170301000000-8" author="vabramovic" context="dev">
+        <insert tableName="INVENTORY_ITEM">
+            <column name="NAME">Projector</column>
+            <column name="DESCRIPTION">VGA projector with a bag and a remote control</column>
+            <column name="QTY_UNIT">Piece</column>
+            <column name="CATEGORY_ID">1</column>
+            <column name="MANUFACTURER_NUMBER">r23uyn1ejo2id1</column>
+            <column name="WARRANTY_NUMBER">kuy37ey98390rj9837gyu3</column>
+            <column name="PURCHASE_DATE">2016-05-20</column>
+            <column name="PRICE">2999.990</column>
+            <column name="CURRENCY">EUR</column>
+            <column name="INVENTORY_NUMBER">1000</column>
+        </insert>
+
+         <insert tableName="INVENTORY_ITEM">
+            <column name="NAME">Complete Gude for Angular 2</column>
+            <column name="DESCRIPTION">December 2016</column>
+            <column name="QTY_UNIT">Piece</column>
+            <column name="CATEGORY_ID">2</column>
+            <column name="MANUFACTURER_NUMBER">387ey301928301983</column>
+            <column name="WARRANTY_NUMBER">87263876112311313</column>
+            <column name="PURCHASE_DATE">2017-02-03</column>
+            <column name="PRICE">172.820</column>
+            <column name="CURRENCY">EUR</column>
+            <column name="INVENTORY_NUMBER">1001</column>
+        </insert>
+
+         <insert tableName="INVENTORY_ITEM">
+            <column name="NAME">21' Monitor</column>
+            <column name="DESCRIPTION">Dell 21-inch display</column>
+            <column name="QTY_UNIT">Piece</column>
+            <column name="CATEGORY_ID">4</column>
+            <column name="MANUFACTURER_NUMBER">84681u2e91893u13291</column>
+            <column name="WARRANTY_NUMBER">sf2y3209384093573125234100003010</column>
+            <column name="PURCHASE_DATE">2016-06-22</column>
+            <column name="PRICE">234.000</column>
+            <column name="CURRENCY">EUR</column>
+            <column name="INVENTORY_NUMBER">1002</column>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>

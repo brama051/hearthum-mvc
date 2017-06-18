@@ -1,0 +1,11 @@
+/.gradle/
+/.idea/
+
+/hearthum-web/build/
+/hearthum-web/.gradle/
+
+/hearthum-domain/.gradle/
+/hearthum-domain/build/
+build
+
+/out
