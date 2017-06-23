@@ -17,13 +17,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("brama051").password("secret").roles("ADMIN");
+        /*auth.inMemoryAuthentication()
+                .withUser("brama051").password("secret").roles("ADMIN");*/
     }
 
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/resources/**", "/login**", "/register**").permitAll()
+        /*http.authorizeRequests()
+                .antMatchers("/resources/ne*ne*", "/login**", "/register**").permitAll()
                 .anyRequest().hasRole("ADMIN")
                 .filterSecurityInterceptorOncePerRequest(false)
                 .and()
@@ -37,6 +37,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login.html?logout=true")
                 .permitAll(true)
                 .and()
-                .csrf().disable();
+                .csrf().disable();*/
     }
 }

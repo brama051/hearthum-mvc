@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog 
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="20170618000-2" author="vabramovic">
+        <createSequence sequenceName="recording_seq" />
+    </changeSet>
+
+    <changeSet id="20170618000-3" author="vabramovic" dbms="postgresql">
+        <createTable tableName="recording">
+            <column name="ID" type="BIGINT" defaultValueComputed="nextval('recording_seq')">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="recording_pk" />
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="content" type="BYTEA">
+                <constraints nullable="false" />
+            </column>
+            <column name="length" type="DECIMAL" />
+            <column name="patient_name" type="VARCHAR(80)" />
+            <column name="patient_email" type="VARCHAR(80)" />
+            <column name="recording_position" type="VARCHAR(80)" />
+            <column name="recording_technology" type="VARCHAR(80)" />
+            <column name="timestamp" type="DATETIME" />
+            
+            
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20170618000-4" author="vabramovic" dbms="postgresql">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="recording"
+                                 constraintName="user_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user" />
+    </changeSet>
+</databaseChangeLog>

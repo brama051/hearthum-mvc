@@ -6,12 +6,11 @@
     <property name="current.timestamp" value="now()" dbms="postgresql" />
 
 
-    <include file="/database/changelogs/marvin-columns-000000-category.xml" />
-    <include file="/database/changelogs/marvin-columns-000100-inventory_item.xml" />
-    <include file="/database/changelogs/marvin-columns-000200-label.xml" />
+    <!--TABLE DEFINITIONS-->
+    <include file="/database/changelogs/marvin-columns-000100-user.xml" />
+    <include file="/database/changelogs/marvin-columns-000200-recording.xml" />
 
-    <include file="/database/changelogs/marvin-test-000000-category.xml" />
-    <include file="/database/changelogs/marvin-test-000100-inventory_item.xml" />
-    <include file="/database/changelogs/marvin-test-000200-label.xml" />
+    <!--TEST DATA-->
+    <include file="/database/changelogs/marvin-test-000100-user.xml" />
 
 </databaseChangeLog>
