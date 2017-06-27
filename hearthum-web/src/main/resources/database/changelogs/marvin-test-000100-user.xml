@@ -14,6 +14,9 @@
             <column name="email">martin.crnjakovic@gmail.com</column>
         </insert>
     </changeSet>
-
+    <changeSet author="vabramovic" id="alterSequence-example">
+        <sql dbms="postgresql">select setval('user_seq', max(id)+1) from app_user</sql>
+    </changeSet>
+    
 
 </databaseChangeLog>

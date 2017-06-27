@@ -4,12 +4,14 @@ import com.vabram.hearthum.model.Recording;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
 /**
  * Created by brama051 on 23/06/2017.
  */
+@CrossOrigin
 @RepositoryRestResource(collectionResourceRel = "recordings", path = "recordings")
 public interface RecordingRepository extends PagingAndSortingRepository<Recording, Long> {
 
