@@ -29,7 +29,7 @@ public class RecordingServiceImpl implements RecordingService {
     }
 
     @Override
-    public Recording getRecording(Long id) {
+    public Recording findOne(Long id) {
         return recordingRepository.findOne(id);
     }
 }

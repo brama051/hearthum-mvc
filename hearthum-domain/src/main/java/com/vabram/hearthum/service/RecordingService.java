@@ -16,7 +16,7 @@ public interface RecordingService {
 
     Recording save(Recording recording);
 
-    Recording getRecording(Long id);
+    Recording findOne(Long id);
 }
 
 
