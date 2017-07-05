@@ -14,7 +14,6 @@
                 <constraints nullable="false" primaryKey="true" primaryKeyName="recording_pk" />
             </column>
             <column name="user_id" type="BIGINT">
-                <constraints nullable="false" />
             </column>
             <column name="content" type="BYTEA">
                 <constraints nullable="false" />
@@ -24,8 +23,7 @@
             <column name="patient_email" type="VARCHAR(80)" />
             <column name="recording_position" type="VARCHAR(80)" />
             <column name="recording_technology" type="VARCHAR(80)" />
-            <column name="timestamp" type="DATETIME" />
-            
+
             
         </createTable>
     </changeSet>

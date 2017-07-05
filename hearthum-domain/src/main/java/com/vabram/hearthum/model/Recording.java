@@ -35,10 +35,6 @@ public class Recording {
     @Column(name = "RECORDING_TECHNOLOGY")
     private String recordingTechnology; // recording technology
 
-    @Column(name = "TIMESTAMP")
-    private LocalDate timestamp; // timestamp
-
-
     // --- get / set methods --------------------------------------------------
 
     public Long getId() {
@@ -97,11 +93,4 @@ public class Recording {
         this.recordingTechnology = recordingTechnology;
     }
 
-    public LocalDate getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDate timestamp) {
-        this.timestamp = timestamp;
-    }
 }
