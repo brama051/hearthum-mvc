@@ -36,6 +36,7 @@ dependencies {
     compile project(':hearthum-domain')
 
     compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework:spring-test:2.5'
     //compile 'org.springframework.boot:spring-boot-starter-security'
 
     //compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jacksonDatatypeJoda}"

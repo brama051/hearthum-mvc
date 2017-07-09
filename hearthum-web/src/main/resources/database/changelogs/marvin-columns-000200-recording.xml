@@ -15,7 +15,7 @@
             </column>
             <column name="user_id" type="BIGINT">
             </column>
-            <column name="content" type="BYTEA">
+            <column name="content" type="TEXT">
                 <constraints nullable="false" />
             </column>
             <column name="length" type="DECIMAL" />

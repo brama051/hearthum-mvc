@@ -1,45 +1,32 @@
-package com.vabram.hearthum.model;
+package com.vabram.hearthum.response;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.*;
+import java.io.File;
+import java.sql.Blob;
 
 /**
  * Created by brama051 on 23/06/2017.
  */
-@Entity
-@Table(name = "RECORDING")
-public class Recording {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+public class RecordingResponse {
+
     private Long id; // primary key
 
     //private User user; // user that created the recording
 
-    @Column(name = "CONTENT")
-    private String content; // actual recording
+    private File content; // actual recording
 
-    @Column(name = "LENGTH")
     private Double recordingLength; // recordingLength (in seconds)
 
-    @Column(name = "PATIENT_NAME")
     private String patientName; // patient name
 
-    @Column(name = "PATIENT_EMAIL")
     private String patientEmail; // patient email
 
-    @Column(name = "RECORDING_POSITION")
     private String recordingPosition; // recording position
 
-    @Column(name = "RECORDING_TECHNOLOGY")
     private String recordingTechnology; // recording technology
 
-    @Column(name = "RECORDING_DATETIME")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime recordingDateTime; // recording datetime
 
     // --- get / set methods --------------------------------------------------
@@ -52,11 +39,11 @@ public class Recording {
         this.id = id;
     }
 
-    public String getContent() {
+    public File getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(File content) {
         this.content = content;
     }
 

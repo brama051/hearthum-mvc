@@ -1,17 +1,22 @@
 package com.vabram.hearthum.controller;
 
 import com.vabram.hearthum.model.Recording;
+import com.vabram.hearthum.response.RecordingResponse;
 import com.vabram.hearthum.service.RecordingService;
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
 
 /**
  * Created by brama051 on 05/07/2017.
@@ -36,6 +41,11 @@ public class RecordingController {
     @ResponseBody
     @GetMapping(value = "/{id}")
     public Recording getRecording(@PathVariable("id") Long id) {
+        /*Recording r = recordingService.findOne(id);
+        RecordingResponse rr = new RecordingResponse();
+        rr.setId(r.getId());
+        rr.setContent(new File());
+        return rr;*/
         return recordingService.findOne(id);
     }
 
@@ -54,8 +64,9 @@ public class RecordingController {
         recording.setRecordingPosition(recordingLocation);
         recording.setRecordingDateTime(LocalDateTime.now());
         recording.setRecordingLength(recordingLength);
+
         try {
-            recording.setContent(content.getBytes());
+            recording.setContent(new String(Base64.getEncoder().encode(content.getBytes())));
         } catch (IOException e) {
             LOGGER.warn(e.getStackTrace(), e);
         }
