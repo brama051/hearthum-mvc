@@ -1,6 +1,8 @@
 package com.vabram.hearthum.model;
 
-import org.joda.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -21,7 +23,7 @@ public class Recording {
     private byte[] content; // actual recording
 
     @Column(name = "LENGTH")
-    private Double length; // length (in seconds)
+    private Double recordingLength; // recordingLength (in seconds)
 
     @Column(name = "PATIENT_NAME")
     private String patientName; // patient name
@@ -34,6 +36,11 @@ public class Recording {
 
     @Column(name = "RECORDING_TECHNOLOGY")
     private String recordingTechnology; // recording technology
+
+    @Column(name = "RECORDING_DATETIME")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime recordingDateTime; // recording datetime
 
     // --- get / set methods --------------------------------------------------
 
@@ -53,12 +60,12 @@ public class Recording {
         this.content = content;
     }
 
-    public Double getLength() {
-        return length;
+    public Double getRecordingLength() {
+        return recordingLength;
     }
 
-    public void setLength(Double length) {
-        this.length = length;
+    public void setRecordingLength(Double recordingLength) {
+        this.recordingLength = recordingLength;
     }
 
     public String getPatientName() {
@@ -93,4 +100,11 @@ public class Recording {
         this.recordingTechnology = recordingTechnology;
     }
 
+    public LocalDateTime getRecordingDateTime() {
+        return recordingDateTime;
+    }
+
+    public void setRecordingDateTime(LocalDateTime recordingDateTime) {
+        this.recordingDateTime = recordingDateTime;
+    }
 }

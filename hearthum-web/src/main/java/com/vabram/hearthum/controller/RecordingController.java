@@ -3,6 +3,7 @@ package com.vabram.hearthum.controller;
 import com.vabram.hearthum.model.Recording;
 import com.vabram.hearthum.service.RecordingService;
 import org.apache.log4j.Logger;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,7 +27,7 @@ public class RecordingController {
     RecordingService recordingService;
 
     @ResponseBody
-    @GetMapping
+    @GetMapping()
     public Page<Recording> getRecordingPage(@RequestParam(name = "page", defaultValue = "0") int page,
                                             @RequestParam(name = "size", defaultValue = "25") int size) {
         return recordingService.findAll(new PageRequest(page, size));
@@ -40,12 +41,19 @@ public class RecordingController {
 
     @ResponseBody
     @PostMapping
-    public Recording postRecording(/*@RequestParam(name = "patientName", defaultValue = "") String patientName,
-                                   @RequestParam(name = "patientEmail", defaultValue = "") String patientEmail,*/
+    public Recording postRecording(@RequestParam(name = "patientName", defaultValue = "", required = false) String patientName,
+                                   @RequestParam(name = "patientEmail", defaultValue = "", required = false) String patientEmail,
+                                   @RequestParam(name = "recordingDevice", defaultValue = "", required = false) String recordingDevice,
+                                   @RequestParam(name = "recordingLocation", defaultValue = "", required = false) String recordingLocation,
+                                   @RequestParam(name = "recordingLength", defaultValue = "0", required = false) Double recordingLength,
                                    @RequestParam(name = "content") MultipartFile content) {
         Recording recording = new Recording();
-        /*recording.setPatientName(patientName);
-        recording.setPatientEmail(patientEmail);*/
+        recording.setPatientName(patientName);
+        recording.setPatientEmail(patientEmail);
+        recording.setRecordingTechnology(recordingDevice);
+        recording.setRecordingPosition(recordingLocation);
+        recording.setRecordingDateTime(LocalDateTime.now());
+        recording.setRecordingLength(recordingLength);
         try {
             recording.setContent(content.getBytes());
         } catch (IOException e) {

@@ -23,6 +23,7 @@
             <column name="patient_email" type="VARCHAR(80)" />
             <column name="recording_position" type="VARCHAR(80)" />
             <column name="recording_technology" type="VARCHAR(80)" />
+            <column name="recording_datetime" type="TIMESTAMP" />
 
             
         </createTable>
