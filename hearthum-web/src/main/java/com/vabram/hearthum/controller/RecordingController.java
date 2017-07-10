@@ -65,6 +65,9 @@ public class RecordingController {
         recording.setRecordingDateTime(LocalDateTime.now());
         recording.setRecordingLength(recordingLength);
 
+        /**
+         * todo: weight, sex, age, comment
+         */
         try {
             recording.setContent(new String(Base64.getEncoder().encode(content.getBytes())));
         } catch (IOException e) {
