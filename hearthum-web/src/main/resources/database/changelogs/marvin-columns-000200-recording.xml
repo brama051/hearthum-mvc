@@ -15,12 +15,19 @@
             </column>
             <column name="user_id" type="BIGINT">
             </column>
-            <column name="content" type="TEXT">
-                <constraints nullable="false" />
-            </column>
-            <column name="length" type="DECIMAL" />
+            <column name="comment" type="TEXT"/>
+
             <column name="patient_name" type="VARCHAR(80)" />
             <column name="patient_email" type="VARCHAR(80)" />
+            <column name="patient_age" type="DECIMAL" />
+            <column name="patient_height" type="DECIMAL" />
+            <column name="patient_weight" type="DECIMAL" />
+            <column name="patient_sex" type="VARCHAR(80)" />
+
+            <column name="recording_content" type="TEXT">
+                <constraints nullable="false" />
+            </column>
+            <column name="recording_length" type="DECIMAL" />
             <column name="recording_position" type="VARCHAR(80)" />
             <column name="recording_technology" type="VARCHAR(80)" />
             <column name="recording_datetime" type="TIMESTAMP" />

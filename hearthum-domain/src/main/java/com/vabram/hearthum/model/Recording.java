@@ -19,11 +19,20 @@ public class Recording {
 
     //private User user; // user that created the recording
 
-    @Column(name = "CONTENT")
-    private String content; // actual recording
+    @Column(name = "RECORDING_CONTENT")
+    private String recordingContent; // actual recording
 
-    @Column(name = "LENGTH")
+    @Column(name = "RECORDING_LENGTH")
     private Double recordingLength; // recordingLength (in seconds)
+
+    @Column(name = "RECORDING_POSITION")
+    private String recordingPosition; // recording position
+
+    @Column(name = "RECORDING_TECHNOLOGY")
+    private String recordingTechnology; // recording technology
+
+    @Column(name = "COMMENT")
+    private String comment; // comment
 
     @Column(name = "PATIENT_NAME")
     private String patientName; // patient name
@@ -31,11 +40,17 @@ public class Recording {
     @Column(name = "PATIENT_EMAIL")
     private String patientEmail; // patient email
 
-    @Column(name = "RECORDING_POSITION")
-    private String recordingPosition; // recording position
+    @Column(name = "PATIENT_AGE")
+    private Double patientAge; // patient age
 
-    @Column(name = "RECORDING_TECHNOLOGY")
-    private String recordingTechnology; // recording technology
+    @Column(name = "PATIENT_SEX")
+    private String patientSex; // patient sex
+
+    @Column(name = "PATIENT_HEIGHT")
+    private Double patientHeight; // patient height
+
+    @Column(name = "PATIENT_WEIGHT")
+    private Double patientWeight; // patient weight
 
     @Column(name = "RECORDING_DATETIME")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -52,12 +67,12 @@ public class Recording {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String getRecordingContent() {
+        return recordingContent;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setRecordingContent(String recordingContent) {
+        this.recordingContent = recordingContent;
     }
 
     public Double getRecordingLength() {
@@ -106,5 +121,45 @@ public class Recording {
 
     public void setRecordingDateTime(LocalDateTime recordingDateTime) {
         this.recordingDateTime = recordingDateTime;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Double getPatientAge() {
+        return patientAge;
+    }
+
+    public void setPatientAge(Double patientAge) {
+        this.patientAge = patientAge;
+    }
+
+    public String getPatientSex() {
+        return patientSex;
+    }
+
+    public void setPatientSex(String patientSex) {
+        this.patientSex = patientSex;
+    }
+
+    public Double getPatientHeight() {
+        return patientHeight;
+    }
+
+    public void setPatientHeight(Double patientHeight) {
+        this.patientHeight = patientHeight;
+    }
+
+    public Double getPatientWeight() {
+        return patientWeight;
+    }
+
+    public void setPatientWeight(Double patientWeight) {
+        this.patientWeight = patientWeight;
     }
 }

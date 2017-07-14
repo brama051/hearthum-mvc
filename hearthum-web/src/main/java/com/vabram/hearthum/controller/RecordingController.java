@@ -1,21 +1,17 @@
 package com.vabram.hearthum.controller;
 
 import com.vabram.hearthum.model.Recording;
-import com.vabram.hearthum.response.RecordingResponse;
 import com.vabram.hearthum.service.RecordingService;
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Base64;
 
 /**
@@ -44,7 +40,7 @@ public class RecordingController {
         /*Recording r = recordingService.findOne(id);
         RecordingResponse rr = new RecordingResponse();
         rr.setId(r.getId());
-        rr.setContent(new File());
+        rr.setRecordingContent(new File());
         return rr;*/
         return recordingService.findOne(id);
     }
@@ -53,23 +49,31 @@ public class RecordingController {
     @PostMapping
     public Recording postRecording(@RequestParam(name = "patientName", defaultValue = "", required = false) String patientName,
                                    @RequestParam(name = "patientEmail", defaultValue = "", required = false) String patientEmail,
+                                   @RequestParam(name = "patientHeight", defaultValue = "", required = false) Double patientHeight,
+                                   @RequestParam(name = "patientWeight", defaultValue = "", required = false) Double patientWeight,
+                                   @RequestParam(name = "patientAge", defaultValue = "", required = false) Double patientAge,
+                                   @RequestParam(name = "patientSex", defaultValue = "", required = false) String patientSex,
                                    @RequestParam(name = "recordingDevice", defaultValue = "", required = false) String recordingDevice,
                                    @RequestParam(name = "recordingLocation", defaultValue = "", required = false) String recordingLocation,
                                    @RequestParam(name = "recordingLength", defaultValue = "0", required = false) Double recordingLength,
-                                   @RequestParam(name = "content") MultipartFile content) {
+                                   @RequestParam(name = "comment", defaultValue = "", required = false) String comment,
+                                   @RequestParam(name = "recordingDateTime", defaultValue = "", required = false) String recordingDateTime,
+                                   @RequestParam(name = "content") MultipartFile recordingContent) {
         Recording recording = new Recording();
         recording.setPatientName(patientName);
         recording.setPatientEmail(patientEmail);
+        recording.setPatientAge(patientAge);
+        recording.setPatientHeight(patientHeight);
+        recording.setPatientWeight(patientWeight);
+        recording.setPatientSex(patientSex);
+        recording.setComment(comment);
         recording.setRecordingTechnology(recordingDevice);
         recording.setRecordingPosition(recordingLocation);
         recording.setRecordingDateTime(LocalDateTime.now());
         recording.setRecordingLength(recordingLength);
 
-        /**
-         * todo: weight, sex, age, comment
-         */
         try {
-            recording.setContent(new String(Base64.getEncoder().encode(content.getBytes())));
+            recording.setRecordingContent(new String(Base64.getEncoder().encode(recordingContent.getBytes())));
         } catch (IOException e) {
             LOGGER.warn(e.getStackTrace(), e);
         }
