@@ -37,12 +37,12 @@ dependencies {
 
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework:spring-test:2.5'
-    //compile 'org.springframework.boot:spring-boot-starter-security'
-
-    //compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jacksonDatatypeJoda}"
     // json
     compile 'com.fasterxml.jackson.core:jackson-annotations'
     compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jacksonDatatypeJoda}"
+
+    // security
+    compile 'com.auth0:auth0-spring-security-api:1.0.0-rc.3'
 
     compile 'org.liquibase:liquibase-core'
     compile 'net.sf.ehcache:ehcache'
