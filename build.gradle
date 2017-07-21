@@ -17,7 +17,7 @@ allprojects {
 }
 
 configure([project(':hearthum-web'), project(':hearthum-domain')]) {
-
+    apply plugin: 'war'
     apply plugin: 'java'
     apply plugin: 'jacoco'
     apply plugin: 'io.spring.dependency-management'
@@ -44,6 +44,7 @@ configure([project(':hearthum-web'), project(':hearthum-domain')]) {
 
     dependencies {
         compile 'org.apache.commons:commons-lang3:3.4'
+        providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
         testCompile "org.dbunit:dbunit:${dbunitVersion}"
         testCompile "com.github.springtestdbunit:spring-test-dbunit:${springTestDbUnitVersion}"

@@ -19,7 +19,7 @@ public class Recording {
 
     //private User user; // user that created the recording
 
-    @Column(name = "RECORDING_CONTENT")
+    @Column(name = "RECORDING_CONTENT", length=10485760)
     private String recordingContent; // actual recording
 
     @Column(name = "RECORDING_LENGTH")

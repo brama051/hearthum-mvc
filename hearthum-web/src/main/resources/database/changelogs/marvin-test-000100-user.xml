@@ -15,7 +15,7 @@
         </insert>
     </changeSet>
     <changeSet author="vabramovic" id="alterSequence-example">
-        <sql dbms="postgresql">select setval('user_seq', max(id)+1) from app_user</sql>
+        <sql dbms="postgresql">select setval('hearthumschema.user_seq', max(id)+1) from hearthumschema.app_user</sql>
     </changeSet>
     
 

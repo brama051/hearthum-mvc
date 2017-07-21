@@ -10,7 +10,7 @@
 
     <changeSet id="20170618000-1" author="vabramovic" dbms="postgresql">
         <createTable tableName="app_user">
-            <column name="id" type="BIGINT" defaultValueComputed="nextval('user_seq')">
+            <column name="id" type="BIGINT" defaultValueComputed="nextval('hearthumschema.user_seq')">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="user_pk" />
             </column>
             <column name="email" type="VARCHAR(80)">

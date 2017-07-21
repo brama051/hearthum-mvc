@@ -73,7 +73,10 @@ public class RecordingController {
         recording.setRecordingLength(recordingLength);
 
         try {
-            recording.setRecordingContent(new String(Base64.getEncoder().encode(recordingContent.getBytes())));
+            String base64recording = new String(Base64.getEncoder().encode(recordingContent.getBytes()));
+            // base64recording = base64recording.substring(0, 100);
+            LOGGER.info(base64recording.length());
+            recording.setRecordingContent(base64recording);
         } catch (IOException e) {
             LOGGER.warn(e.getStackTrace(), e);
         }

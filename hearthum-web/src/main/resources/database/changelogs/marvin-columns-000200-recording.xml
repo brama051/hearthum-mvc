@@ -10,7 +10,7 @@
 
     <changeSet id="20170618000-3" author="vabramovic" dbms="postgresql">
         <createTable tableName="recording">
-            <column name="ID" type="BIGINT" defaultValueComputed="nextval('recording_seq')">
+            <column name="ID" type="BIGINT" defaultValueComputed="nextval('hearthumschema.recording_seq')">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="recording_pk" />
             </column>
             <column name="user_id" type="BIGINT">
