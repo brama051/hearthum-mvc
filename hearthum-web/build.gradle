@@ -5,13 +5,9 @@ plugins {
     id 'com.ag04.annotation-processor' version '0.0.1'
 }
 
-war {
-    manifest {
-        attributes(
-                'Build-Version': version,
-                'Build-Time': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        )
-    }
+jar {
+    baseName = 'hearthum-backend'
+    version =  '0.1.0'
 }
 
 annotationProcessing {
@@ -62,3 +58,6 @@ dependencies {
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 
 }
+
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
