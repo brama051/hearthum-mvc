@@ -4,6 +4,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
+    <changeSet author="vabramovic" id="1">
+        <sql dbms="postgresql" endDelimiter=";">
+            CREATE SCHEMA hearthumschema
+        </sql>
+    </changeSet>
     <changeSet id="20170618000-0" author="vabramovic">
         <createSequence sequenceName="user_seq" />
     </changeSet>

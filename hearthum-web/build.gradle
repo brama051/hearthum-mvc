@@ -44,12 +44,12 @@ dependencies {
     compile 'net.sf.ehcache:ehcache'
 
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
-    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
+    // compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    // compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
 
     compile 'javax.servlet:jstl:1.2'
 
-    compile 'org.mapstruct:mapstruct-jdk8:1.0.0.Final'
+    // compile 'org.mapstruct:mapstruct-jdk8:1.0.0.Final'
 
     runtime "org.postgresql:postgresql:${postgresDriverVersion}"
 
