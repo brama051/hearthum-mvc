@@ -115,6 +115,12 @@ springBoot{
 jar {
     baseName = 'hearthum-backend'
     version =  '0.1.0'
+    manifest (
+            'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+            'Main-Class': 'com.vabram.hearthum.Application'
+    )
+
+
 }
 
 task stage(dependsOn: ['build', 'clean', 'jar'])
