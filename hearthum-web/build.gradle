@@ -59,6 +59,3 @@ dependencies {
 
 }
 
-task stage(dependsOn: ['build', 'clean', 'jar'])
-build.mustRunAfter clean
-jar.mustRunAfter build

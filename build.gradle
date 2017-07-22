@@ -57,3 +57,7 @@ configure([project(':hearthum-web'), project(':hearthum-domain')]) {
 task wrapper(type: Wrapper) {
     gradleVersion = '3.4'
 }
+
+task stage(dependsOn: ['build', 'clean', 'jar'])
+build.mustRunAfter clean
+jar.mustRunAfter build
