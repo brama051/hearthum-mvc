@@ -115,7 +115,7 @@ springBoot{
 jar {
     baseName = 'hearthum-backend'
     version =  '0.1.0'
-    manifest (
+    manifest.attributes(
             'Main-Class': 'com.vabram.hearthum.Application'
     )
 
