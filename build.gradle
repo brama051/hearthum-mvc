@@ -7,98 +7,106 @@ plugins {
 
 
 
-    group = 'com.vabram.hearthum'
-    version = '0.1.0'
+group = 'com.vabram.hearthum'
+version = '0.1.0'
 
-    apply plugin: 'idea'
+apply plugin: 'idea'
 
-    gradle.projectsEvaluated {
-        tasks.withType(JavaCompile) {
-            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
-        }
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
     }
+}
 
-
-
-    apply plugin: 'war'
-    apply plugin: 'java'
-    apply plugin: 'jacoco'
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management'
-
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-
-    jacoco {
-        toolVersion = '0.7.8'
-    }
-
+buildscript {
     repositories {
         maven {
-            url 'http://devhub.ag04.com/nexus/content/repositories/releases'
-        }
-        mavenCentral()
-    }
-
-    dependencyManagement {
-        imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+            url "https://plugins.gradle.org/m2/"
         }
     }
-
     dependencies {
-        compile 'org.apache.commons:commons-lang3:3.4'
-        providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-        compile("org.springframework.boot:spring-boot-starter-web")
-        compile("org.thymeleaf:thymeleaf-spring4")
-        compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
-
-        compile 'org.springframework.boot:spring-boot-starter-web'
-        compile 'org.springframework:spring-test:2.5'
-        // json
-        compile 'com.fasterxml.jackson.core:jackson-annotations'
-        compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jacksonDatatypeJoda}"
-
-        // security
-        compile 'com.auth0:auth0-spring-security-api:1.0.0-rc.3'
-
-        compile 'org.liquibase:liquibase-core'
-        compile 'net.sf.ehcache:ehcache'
-
-        compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
-        // compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
-        // compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
-
-        compile 'javax.servlet:jstl:1.2'
-
-        // compile 'org.mapstruct:mapstruct-jdk8:1.0.0.Final'
-        compile 'org.springframework.boot:spring-boot-starter-security'
-        compile 'org.springframework.boot:spring-boot-starter'
-        compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-        compile 'org.springframework:spring-context-support'
-        compile 'com.h2database:h2'
-        compile 'org.springframework.boot:spring-boot-starter-data-rest'
-
-
-        compile 'org.apache.commons:commons-lang3'
-        compile 'joda-time:joda-time'
-        compile 'org.jadira.usertype:usertype.core:5.0.0.GA'
-        compile "com.querydsl:querydsl-jpa:${queryDslVersion}"
-
-
-        //
-        runtime "org.postgresql:postgresql:${postgresDriverVersion}"
-
-        providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-
-        testCompile 'org.springframework.boot:spring-boot-starter-test'
-
-        testCompile "org.dbunit:dbunit:${dbunitVersion}"
-        testCompile "com.github.springtestdbunit:spring-test-dbunit:${springTestDbUnitVersion}"
-        testCompile 'org.mockito:mockito-core'
-        testCompile 'org.javassist:javassist'
-        testCompile 'org.easytesting:fest-assert:1.4'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE"
     }
+}
+
+apply plugin: 'war'
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jacoco {
+    toolVersion = '0.7.8'
+}
+
+repositories {
+    maven {
+        url 'http://devhub.ag04.com/nexus/content/repositories/releases'
+    }
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+    }
+}
+
+dependencies {
+    compile 'org.apache.commons:commons-lang3:3.4'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.thymeleaf:thymeleaf-spring4")
+    compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
+
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework:spring-test:2.5'
+    // json
+    compile 'com.fasterxml.jackson.core:jackson-annotations'
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jacksonDatatypeJoda}"
+
+    // security
+    compile 'com.auth0:auth0-spring-security-api:1.0.0-rc.3'
+
+    compile 'org.liquibase:liquibase-core'
+    compile 'net.sf.ehcache:ehcache'
+
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    // compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
+
+    compile 'javax.servlet:jstl:1.2'
+
+    // compile 'org.mapstruct:mapstruct-jdk8:1.0.0.Final'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework:spring-context-support'
+    compile 'com.h2database:h2'
+    compile 'org.springframework.boot:spring-boot-starter-data-rest'
+
+
+    compile 'org.apache.commons:commons-lang3'
+    compile 'joda-time:joda-time'
+    compile 'org.jadira.usertype:usertype.core:5.0.0.GA'
+    compile "com.querydsl:querydsl-jpa:${queryDslVersion}"
+
+    //
+    runtime "org.postgresql:postgresql:${postgresDriverVersion}"
+
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+
+    testCompile "org.dbunit:dbunit:${dbunitVersion}"
+    testCompile "com.github.springtestdbunit:spring-test-dbunit:${springTestDbUnitVersion}"
+    testCompile 'org.mockito:mockito-core'
+    testCompile 'org.javassist:javassist'
+    testCompile 'org.easytesting:fest-assert:1.4'
+}
 
 
 
@@ -107,11 +115,11 @@ task wrapper(type: Wrapper) {
 }
 
 
-bootRun{
+bootRun {
     addResources = true
 }
 
-springBoot{
+springBoot {
     mainClass = 'com.vabram.hearthum.Application'
 }
 
