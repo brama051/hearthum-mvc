@@ -59,5 +59,3 @@ task wrapper(type: Wrapper) {
 }
 
 task stage(dependsOn: ['build', 'clean', 'jar'])
-build.mustRunAfter clean
-jar.mustRunAfter build
