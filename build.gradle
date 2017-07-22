@@ -103,9 +103,6 @@ task wrapper(type: Wrapper) {
     gradleVersion = '3.4'
 }
 
-task stage(dependsOn: ['build', 'clean', 'jar'])
-
-
 
 bootRun{
     addResources = true
