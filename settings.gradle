@@ -10,5 +10,3 @@ pluginRepositories {
 
 rootProject.name = 'hearthum'
 
-include 'hearthum-domain'
-include 'hearthum-web'
