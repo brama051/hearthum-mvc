@@ -34,14 +34,16 @@ public class RecordingController {
 
     @ResponseBody
     @GetMapping()
-    public Page<Recording> getRecordingPage(@RequestParam(name = "page", defaultValue = "0") int page,
+    public Page<Recording> getRecordingPage(@RequestHeader(value="userEmail", defaultValue = "") String userEmail,
+                                            @RequestParam(name = "page", defaultValue = "0") int page,
                                             @RequestParam(name = "size", defaultValue = "25") int size) {
         return recordingService.findAll(new PageRequest(page, size));
     }
 
     @ResponseBody
     @GetMapping(value = "/{id}")
-    public Recording getRecording(@PathVariable("id") Long id) {
+    public Recording getRecording(@RequestHeader(value="userEmail", defaultValue = "") String userEmail,
+                                  @PathVariable("id") Long id) {
         /*Recording r = recordingService.findOne(id);
         RecordingResponse rr = new RecordingResponse();
         rr.setId(r.getId());
@@ -52,7 +54,7 @@ public class RecordingController {
 
     @ResponseBody
     @PostMapping
-    public Recording postRecording(@RequestHeader(value="userEmail") String userEmail,
+    public Recording postRecording(@RequestHeader(value="userEmail", defaultValue = "") String userEmail,
                                    @RequestParam(name = "patientName", defaultValue = "", required = false) String patientName,
                                    @RequestParam(name = "patientEmail", defaultValue = "", required = false) String patientEmail,
                                    @RequestParam(name = "patientHeight", defaultValue = "", required = false) Double patientHeight,
