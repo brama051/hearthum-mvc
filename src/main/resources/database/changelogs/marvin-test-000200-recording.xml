@@ -7,6 +7,7 @@
     <changeSet id="20170301000000-109" author="vabramovic" context="dev">
         <insert tableName="recording">
             <column name="id">1</column>
+            <column name="user_id">1</column>
             <column name="comment">The first successful recording.</column>
             <column name="patient_age">27</column>
             <column name="patient_email">lbracano@gmail.com</column>
