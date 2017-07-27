@@ -1,10 +1,8 @@
 package com.vabram.hearthum.response;
 
 import org.joda.time.LocalDateTime;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.sql.Blob;
 
 /**
  * Created by brama051 on 23/06/2017.

@@ -1,7 +1,9 @@
 package com.vabram.hearthum.controller;
 
 import com.vabram.hearthum.model.Recording;
+import com.vabram.hearthum.model.User;
 import com.vabram.hearthum.service.RecordingService;
+import com.vabram.hearthum.service.UserService;
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class RecordingController {
     @Autowired
     RecordingService recordingService;
 
+    @Autowired
+    UserService userService;
+
     @ResponseBody
     @GetMapping()
     public Page<Recording> getRecordingPage(@RequestParam(name = "page", defaultValue = "0") int page,
@@ -47,7 +52,8 @@ public class RecordingController {
 
     @ResponseBody
     @PostMapping
-    public Recording postRecording(@RequestParam(name = "patientName", defaultValue = "", required = false) String patientName,
+    public Recording postRecording(@RequestHeader(value="userEmail") String userEmail,
+                                   @RequestParam(name = "patientName", defaultValue = "", required = false) String patientName,
                                    @RequestParam(name = "patientEmail", defaultValue = "", required = false) String patientEmail,
                                    @RequestParam(name = "patientHeight", defaultValue = "", required = false) Double patientHeight,
                                    @RequestParam(name = "patientWeight", defaultValue = "", required = false) Double patientWeight,
@@ -59,7 +65,11 @@ public class RecordingController {
                                    @RequestParam(name = "comment", defaultValue = "", required = false) String comment,
                                    @RequestParam(name = "recordingDateTime", defaultValue = "", required = false) String recordingDateTime,
                                    @RequestParam(name = "content") MultipartFile recordingContent) {
+
+        User user = userService.getUserByEmail(userEmail);
+
         Recording recording = new Recording();
+        recording.setUser(user);
         recording.setPatientName(patientName);
         recording.setPatientEmail(patientEmail);
         recording.setPatientAge(patientAge);
@@ -85,11 +95,5 @@ public class RecordingController {
     }
 
 
-
-    /*@ResponseBody
-    @DeleteMapping(name = "/{id}")
-    public Recording deleteRecording(@PathVariable("id") Long id) {
-        return recordingService.findOne(id);
-    }*/
 
 }
