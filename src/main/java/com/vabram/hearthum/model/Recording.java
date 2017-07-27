@@ -17,7 +17,9 @@ public class Recording {
     @Column(name = "ID")
     private Long id; // primary key
 
-    //private User user; // user that created the recording
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user; // user that created the recording
 
     @Column(name = "RECORDING_CONTENT", length=10485760)
     private String recordingContent; // actual recording
@@ -65,6 +67,14 @@ public class Recording {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getRecordingContent() {
