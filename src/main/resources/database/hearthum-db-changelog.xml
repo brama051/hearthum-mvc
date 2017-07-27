@@ -12,5 +12,6 @@
 
     <!--TEST DATA-->
     <include file="/database/changelogs/marvin-test-000100-user.xml" />
+    <include file="/database/changelogs/marvin-test-000200-recording.xml" />
 
 </databaseChangeLog>
