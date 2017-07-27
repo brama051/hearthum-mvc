@@ -37,6 +37,7 @@ public class RecordingController {
     public Page<Recording> getRecordingPage(@RequestHeader(value="userEmail", defaultValue = "") String userEmail,
                                             @RequestParam(name = "page", defaultValue = "0") int page,
                                             @RequestParam(name = "size", defaultValue = "25") int size) {
+        LOGGER.info("User accessed a recording page: " + userEmail);
         return recordingService.findAll(new PageRequest(page, size));
     }
 
@@ -44,6 +45,7 @@ public class RecordingController {
     @GetMapping(value = "/{id}")
     public Recording getRecording(@RequestHeader(value="userEmail", defaultValue = "") String userEmail,
                                   @PathVariable("id") Long id) {
+        LOGGER.info("User accessed a recording: " + userEmail);
         /*Recording r = recordingService.findOne(id);
         RecordingResponse rr = new RecordingResponse();
         rr.setId(r.getId());
@@ -67,7 +69,7 @@ public class RecordingController {
                                    @RequestParam(name = "comment", defaultValue = "", required = false) String comment,
                                    @RequestParam(name = "recordingDateTime", defaultValue = "", required = false) String recordingDateTime,
                                    @RequestParam(name = "content") MultipartFile recordingContent) {
-
+        LOGGER.info("User is trying to create a recording: " + userEmail);
         User user = userService.getUserByEmail(userEmail);
 
         Recording recording = new Recording();
