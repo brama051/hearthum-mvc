@@ -19,11 +19,11 @@ public interface RecordingRepository extends PagingAndSortingRepository<Recordin
 
     Page<Recording> findAllByPatientName(String patientName, Pageable page);
 
-    Page<Recording> findAllByUserPatientEmail(User user, String patientEmail, Pageable page);
+    Page<Recording> findAllByUserAndPatientEmail(User user, String patientEmail, Pageable page);
 
     Page<Recording> findAllByPatientEmail(String patientEmail, Pageable page);
 
     Page<Recording> findAllByRecordingDateTimeBetween(LocalDateTime recordingDateTimeStart, LocalDateTime recordingDateTimeEnd, Pageable page);
 
-    Page<Recording> findAllByUserRecordingDateTimeBetween(User user, LocalDateTime recordingDateTimeStart, LocalDateTime recordingDateTimeEnd, Pageable page);
+    Page<Recording> findAllByUserAndRecordingDateTimeBetween(User user, LocalDateTime recordingDateTimeStart, LocalDateTime recordingDateTimeEnd, Pageable page);
 }
