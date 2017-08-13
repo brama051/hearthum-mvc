@@ -19,7 +19,7 @@
             <column name="analyzer_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="recording_rating" type="TEXT"/>
+            <column name="recording_rating" type="INT"/>
             <column name="analysis_comment" type="TEXT"/>
             <column name="analysis_outcome" type="BOOLEAN"/>
             <column name="analysis_technology" type="VARCHAR(80)" />
