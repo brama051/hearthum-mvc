@@ -1,15 +1,10 @@
 package com.vabram.hearthum.service.impl;
 
 import com.vabram.hearthum.model.Analyzer;
-import com.vabram.hearthum.model.User;
 import com.vabram.hearthum.repository.AnalyzerRepository;
-import com.vabram.hearthum.repository.UserRepository;
 import com.vabram.hearthum.service.AnalyzerService;
-import com.vabram.hearthum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 /**
