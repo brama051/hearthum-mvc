@@ -2,7 +2,6 @@ package com.vabram.hearthum.service;
 
 import com.vabram.hearthum.model.Recording;
 import com.vabram.hearthum.model.User;
-import org.joda.time.LocalDateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

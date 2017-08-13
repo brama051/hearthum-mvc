@@ -16,7 +16,6 @@ public class Analyzer {
     @Column(name = "email")
     private String email; // analyzer email
 
-
     @Column(name = "name")
     private String name; // analyzer email
 
