@@ -9,9 +9,13 @@
     <!--TABLE DEFINITIONS-->
     <include file="/database/changelogs/marvin-columns-000100-user.xml" />
     <include file="/database/changelogs/marvin-columns-000200-recording.xml" />
+    <include file="/database/changelogs/marvin-columns-000300-analyzer.xml" />
+    <include file="/database/changelogs/marvin-columns-000400-analysis.xml" />
 
     <!--TEST DATA-->
     <include file="/database/changelogs/marvin-test-000100-user.xml" />
     <include file="/database/changelogs/marvin-test-000200-recording.xml" />
+    <include file="/database/changelogs/marvin-test-000300-analyzer.xml" />
+    <include file="/database/changelogs/marvin-test-000400-analysis.xml" />
 
 </databaseChangeLog>

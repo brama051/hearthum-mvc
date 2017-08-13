@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog 
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="20170618000-0" author="vabramovic">
+        <createSequence sequenceName="analyzer_seq" />
+    </changeSet>
+
+    <changeSet id="20170618000-1" author="vabramovic" dbms="postgresql">
+        <createTable tableName="analyzer">
+            <column name="id" type="BIGINT" defaultValueComputed="nextval('hearthumschema.analyzer_seq')">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="analyzer_pk" />
+            </column>
+            <column name="email" type="VARCHAR(80)">
+                <constraints nullable="false" />
+            </column>
+            <column name="name" type="VARCHAR(80)"/>
+
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

@@ -42,7 +42,7 @@ public interface RecordingService {
      * @param page
      * @return
      */
-    Page<Recording> findAllByRecordingDateTimeBetween(User user, LocalDateTime recordingDateTimeStart, LocalDateTime recordingDateTimeEnd, Pageable page);
+    Page<Recording> findAllByRecordingDateTimeBetween(User user, String filter, Pageable page);
 
     Recording save(Recording recording);
 

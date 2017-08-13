@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="20170301000000-9" author="vabramovic" context="dev">
+        <insert tableName="analysis">
+            <column name="id">1</column>
+            <column name="recording_id">1</column>
+            <column name="analyzer_id">1</column>
+            <column name="recording_rating">1</column>
+            <column name="analysis_comment">Test comment</column>
+            <column name="analysis_outcome">false</column>
+            <column name="analysis_technology">None</column>
+            <column name="analysis_datetime">2017-07-31 15:18:41.419</column>
+        </insert>
+    </changeSet>
+    <changeSet author="vabramovic" id="alterSequence-example">
+        <sql dbms="postgresql">select setval('hearthumschema.analysis_seq', max(id)+1) from hearthumschema.analysis</sql>
+    </changeSet>
+    
+
+</databaseChangeLog>

@@ -15,13 +15,13 @@ public interface RecordingRepository extends PagingAndSortingRepository<Recordin
 
     Page<Recording> findAllByUser(User user, Pageable page);
 
-    Page<Recording> findAllByUserAndPatientName(User user, String patientName, Pageable page);
+    Page<Recording> findAllByUserAndPatientNameContainingIgnoreCase(User user, String patientName, Pageable page);
 
-    Page<Recording> findAllByPatientName(String patientName, Pageable page);
+    Page<Recording> findAllByPatientNameContainingIgnoreCase(String patientName, Pageable page);
 
-    Page<Recording> findAllByUserAndPatientEmail(User user, String patientEmail, Pageable page);
+    Page<Recording> findAllByUserAndPatientEmailContainingIgnoreCase(User user, String patientEmail, Pageable page);
 
-    Page<Recording> findAllByPatientEmail(String patientEmail, Pageable page);
+    Page<Recording> findAllByPatientEmailContainingIgnoreCase(String patientEmail, Pageable page);
 
     Page<Recording> findAllByRecordingDateTimeBetween(LocalDateTime recordingDateTimeStart, LocalDateTime recordingDateTimeEnd, Pageable page);
 

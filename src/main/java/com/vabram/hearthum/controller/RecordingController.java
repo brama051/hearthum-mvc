@@ -9,6 +9,7 @@ import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,15 +38,43 @@ public class RecordingController {
     public Page<Recording> getRecordingPage(@RequestHeader(value="userEmail", defaultValue = "") String userEmail,
                                             @RequestParam(name = "page", defaultValue = "0") int page,
                                             @RequestParam(name = "size", defaultValue = "25") int size,
-                                            @RequestParam(name = "filterByUser", defaultValue = "false") boolean filterByUser) {
+                                            @RequestParam(name = "filter", defaultValue = "") String filter,
+                                            @RequestParam(name = "filterByUser", defaultValue = "false") boolean filterByUser,
+                                            @RequestParam(name = "filterBy", defaultValue = "patientName") String filterBy,
+                                            @RequestParam(name = "sortType", defaultValue = "descending") String sortType) {
+        // required for adding the user to our database
         User user = userService.getUserByEmail(userEmail);
-        LOGGER.info("User accessed a recording page: " + userEmail);
 
-        if (filterByUser) {
-            return recordingService.findAll(user, new PageRequest(page, size));
-        } else {
-            return recordingService.findAll(null, new PageRequest(page, size));
+        // required for recording service
+        if (!filterByUser) {
+            user = null;
         }
+
+        // required pageRequest parameter
+        Sort.Direction direction = null;
+        if (sortType.equals("descending")) {
+            direction = Sort.Direction.DESC;
+        } else {
+            direction = Sort.Direction.ASC;
+        }
+
+        if (filter.equals("")) {
+            return recordingService.findAll(user, new PageRequest(page, size, direction, "recordingDateTime"));
+        }
+
+        // determining type of search
+        switch (filterBy) {
+            case "patientEmail":
+                return recordingService.findAllByPatientEmail(user, filter, new PageRequest(page, size, direction, "patientEmail"));
+
+            case "dateCreated":
+                return recordingService.findAllByRecordingDateTimeBetween(user, filter, new PageRequest(page, size, direction, "recordingDateTime"));
+
+            default:
+                return recordingService.findAllByPatientName(user, filter, new PageRequest(page, size, direction, "patientName"));
+
+        }
+
     }
 
     @ResponseBody

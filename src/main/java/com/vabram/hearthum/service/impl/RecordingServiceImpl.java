@@ -4,7 +4,11 @@ import com.vabram.hearthum.model.Recording;
 import com.vabram.hearthum.model.User;
 import com.vabram.hearthum.repository.RecordingRepository;
 import com.vabram.hearthum.service.RecordingService;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,17 +35,37 @@ public class RecordingServiceImpl implements RecordingService {
 
     @Override
     public Page<Recording> findAllByPatientName(User user, String patientName, Pageable page) {
-        return null;
+        if (user == null) {
+            return recordingRepository.findAllByPatientNameContainingIgnoreCase(patientName, page);
+        } else {
+            return recordingRepository.findAllByUserAndPatientNameContainingIgnoreCase(user, patientName, page);
+        }
     }
 
     @Override
     public Page<Recording> findAllByPatientEmail(User user, String patientName, Pageable page) {
-        return null;
+        if (user == null) {
+            return recordingRepository.findAllByPatientEmailContainingIgnoreCase(patientName, page);
+        } else {
+            return recordingRepository.findAllByUserAndPatientEmailContainingIgnoreCase(user, patientName, page);
+        }
     }
 
     @Override
-    public Page<Recording> findAllByRecordingDateTimeBetween(User user, LocalDateTime recordingDateTimeStart, LocalDateTime recordingDateTimeEnd, Pageable page) {
-        return null;
+    public Page<Recording> findAllByRecordingDateTimeBetween(User user, String filter, Pageable page) {
+        //filter.indexOf('~');
+        String start = filter.substring(0, filter.indexOf('~'));
+        String end = filter.substring(filter.indexOf('~') + 1, filter.length());
+        DateTimeFormatter fmt = DateTimeFormat.forPattern( "yyyy-MM-dd'T'HH:mm");
+
+        LocalDateTime recordingDateTimeStart = fmt.parseLocalDateTime(start);
+        LocalDateTime recordingDateTimeEnd = fmt.parseLocalDateTime(end);
+
+        if (user == null) {
+            return recordingRepository.findAllByRecordingDateTimeBetween(recordingDateTimeStart, recordingDateTimeEnd, page);
+        } else {
+            return recordingRepository.findAllByUserAndRecordingDateTimeBetween(user, recordingDateTimeStart, recordingDateTimeEnd, page);
+        }
     }
 
     @Override
