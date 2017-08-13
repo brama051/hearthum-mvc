@@ -1,6 +1,10 @@
 package com.vabram.hearthum.repository;
 
 import com.vabram.hearthum.model.Recording;
+import com.vabram.hearthum.model.User;
+import org.joda.time.LocalDateTime;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
@@ -11,9 +15,17 @@ import java.util.List;
 //@CrossOrigin
 public interface RecordingRepository extends PagingAndSortingRepository<Recording, Long> {
 
-    List<Recording> findAllByPatientName(String patientName);
+    Page<Recording> findAllByUser(User user, Pageable page);
 
-    List<Recording> findAllByPatientEmail(String patientEmail);
+    Page<Recording> findAllByUserAndPatientName(User user, String patientName, Pageable page);
 
+    Page<Recording> findAllByPatientName(String patientName, Pageable page);
 
+    Page<Recording> findAllByUserPatientEmail(User user, String patientEmail, Pageable page);
+
+    Page<Recording> findAllByPatientEmail(String patientEmail, Pageable page);
+
+    Page<Recording> findAllByRecordingDateTimeBetween(LocalDateTime recordingDateTimeStart, LocalDateTime recordingDateTimeEnd, Pageable page);
+
+    Page<Recording> findAllByUserRecordingDateTimeBetween(User user, LocalDateTime recordingDateTimeStart, LocalDateTime recordingDateTimeEnd, Pageable page);
 }

@@ -36,9 +36,16 @@ public class RecordingController {
     @GetMapping()
     public Page<Recording> getRecordingPage(@RequestHeader(value="userEmail", defaultValue = "") String userEmail,
                                             @RequestParam(name = "page", defaultValue = "0") int page,
-                                            @RequestParam(name = "size", defaultValue = "25") int size) {
+                                            @RequestParam(name = "size", defaultValue = "25") int size,
+                                            @RequestParam(name = "filterByUser", defaultValue = "false") boolean filterByUser) {
+        User user = userService.getUserByEmail(userEmail);
         LOGGER.info("User accessed a recording page: " + userEmail);
-        return recordingService.findAll(new PageRequest(page, size));
+
+        if (filterByUser) {
+            return recordingService.findAll(user, new PageRequest(page, size));
+        } else {
+            return recordingService.findAll(null, new PageRequest(page, size));
+        }
     }
 
     @ResponseBody
