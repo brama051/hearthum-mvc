@@ -1,6 +1,7 @@
 package com.vabram.hearthum.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -17,6 +18,7 @@ public class Analysis {
     @Column(name = "ID")
     private Long id; // primary key
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "RECORDING_ID")
     private Recording recording; // recording that is subject of the analysis

@@ -5,6 +5,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by brama051 on 23/06/2017.
@@ -58,6 +59,9 @@ public class Recording {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime recordingDateTime; // recording datetime
+
+    @OneToMany(mappedBy = "recording", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Analysis> analysisList;
 
     // --- get / set methods --------------------------------------------------
 
@@ -171,5 +175,13 @@ public class Recording {
 
     public void setPatientWeight(Double patientWeight) {
         this.patientWeight = patientWeight;
+    }
+
+    public List<Analysis> getAnalysisList() {
+        return analysisList;
+    }
+
+    public void setAnalysisList(List<Analysis> analysisList) {
+        this.analysisList = analysisList;
     }
 }

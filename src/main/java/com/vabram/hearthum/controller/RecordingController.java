@@ -1,7 +1,9 @@
 package com.vabram.hearthum.controller;
 
+import com.vabram.hearthum.model.Analysis;
 import com.vabram.hearthum.model.Recording;
 import com.vabram.hearthum.model.User;
+import com.vabram.hearthum.service.AnalysisService;
 import com.vabram.hearthum.service.RecordingService;
 import com.vabram.hearthum.service.UserService;
 import org.apache.log4j.Logger;
@@ -16,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 
 /**
  * Created by brama051 on 05/07/2017.
@@ -32,6 +35,9 @@ public class RecordingController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    AnalysisService analysisService;
 
     @ResponseBody
     @GetMapping()
@@ -134,6 +140,17 @@ public class RecordingController {
         return recordingService.save(recording);
     }
 
+    @ResponseBody
+    @GetMapping("{id}/analysis")
+    public List<Analysis> getRecordingPage(@RequestHeader(value="userEmail", defaultValue = "") String userEmail,
+                                           @PathVariable(name = "id") Long id) {
+        LOGGER.info("User is trying to get a list of recording analysis: " + userEmail);
+        User user = userService.getUserByEmail(userEmail);
+
+        Recording recording = recordingService.findOne(id);
+
+        return analysisService.findAllByRecording(recording);
+    }
 
 
 }
