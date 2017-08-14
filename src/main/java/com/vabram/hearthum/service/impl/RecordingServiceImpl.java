@@ -67,6 +67,41 @@ public class RecordingServiceImpl implements RecordingService {
     }
 
     @Override
+    public Page<Recording> findAllAnalyzedByPatientName(User user, String patientName, Pageable page) {
+
+        if (user == null) {
+            return recordingRepository.findDistinctByPatientNameContainingIgnoreCaseAndAnalysisListIsNotNull(patientName, page);
+        } else {
+            return recordingRepository.findDistinctByUserAndPatientNameContainingIgnoreCaseAndAnalysisListIsNotNull(user, patientName, page);
+        }
+    }
+
+    @Override
+    public Page<Recording> findAllAnalyzedByPatientEmail(User user, String patientName, Pageable page) {
+        if (user == null) {
+            return recordingRepository.findDistinctByPatientEmailContainingIgnoreCaseAndAnalysisListIsNotNull(patientName, page);
+        } else {
+            return recordingRepository.findDistinctByUserAndPatientEmailContainingIgnoreCaseAndAnalysisListIsNotNull(user, patientName, page);
+        }
+    }
+
+    @Override
+    public Page<Recording> findAllAnalyzedByRecordingDateTimeBetween(User user, String filter, Pageable page) {
+        String start = filter.substring(0, filter.indexOf('~'));
+        String end = filter.substring(filter.indexOf('~') + 1, filter.length());
+        DateTimeFormatter fmt = DateTimeFormat.forPattern( "yyyy-MM-dd'T'HH:mm");
+
+        LocalDateTime recordingDateTimeStart = fmt.parseLocalDateTime(start);
+        LocalDateTime recordingDateTimeEnd = fmt.parseLocalDateTime(end);
+
+        if (user == null) {
+            return recordingRepository.findDistinctByRecordingDateTimeBetweenAndAnalysisListIsNotNull(recordingDateTimeStart, recordingDateTimeEnd, page);
+        } else {
+            return recordingRepository.findDistinctByUserAndRecordingDateTimeBetweenAndAnalysisListIsNotNull(user, recordingDateTimeStart, recordingDateTimeEnd, page);
+        }
+    }
+
+    @Override
     public Recording save(Recording recording) {
         return recordingRepository.save(recording);
     }

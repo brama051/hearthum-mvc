@@ -47,7 +47,8 @@ public class RecordingController {
                                             @RequestParam(name = "filter", defaultValue = "") String filter,
                                             @RequestParam(name = "filterByUser", defaultValue = "false") boolean filterByUser,
                                             @RequestParam(name = "filterBy", defaultValue = "patientName") String filterBy,
-                                            @RequestParam(name = "sortType", defaultValue = "descending") String sortType) {
+                                            @RequestParam(name = "sortType", defaultValue = "descending") String sortType,
+                                            @RequestParam(name = "analyzed", defaultValue = "false") boolean analyzed) {
         // required for adding the user to our database
         User user = userService.getUserByEmail(userEmail);
 
@@ -64,22 +65,27 @@ public class RecordingController {
             direction = Sort.Direction.ASC;
         }
 
-        if (filter.equals("")) {
+        /*if (filter.equals("")) {
             return recordingService.findAll(user, new PageRequest(page, size, direction, "recordingDateTime"));
+        }*/
+
+        if (analyzed) {
+            return recordingService.findAllAnalyzedByPatientEmail(user, filter, new PageRequest(page, size, direction, "patientEmail"));
+        } else {
+            // determining type of search
+            switch (filterBy) {
+                case "patientEmail":
+                    return recordingService.findAllByPatientEmail(user, filter, new PageRequest(page, size, direction, "patientEmail"));
+
+                case "dateCreated":
+                    return recordingService.findAllByRecordingDateTimeBetween(user, filter, new PageRequest(page, size, direction, "recordingDateTime"));
+
+                default:
+                    return recordingService.findAllByPatientName(user, filter, new PageRequest(page, size, direction, "patientName"));
+
+            }
         }
 
-        // determining type of search
-        switch (filterBy) {
-            case "patientEmail":
-                return recordingService.findAllByPatientEmail(user, filter, new PageRequest(page, size, direction, "patientEmail"));
-
-            case "dateCreated":
-                return recordingService.findAllByRecordingDateTimeBetween(user, filter, new PageRequest(page, size, direction, "recordingDateTime"));
-
-            default:
-                return recordingService.findAllByPatientName(user, filter, new PageRequest(page, size, direction, "patientName"));
-
-        }
 
     }
 

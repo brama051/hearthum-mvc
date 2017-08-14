@@ -26,4 +26,19 @@ public interface RecordingRepository extends PagingAndSortingRepository<Recordin
     Page<Recording> findAllByRecordingDateTimeBetween(LocalDateTime recordingDateTimeStart, LocalDateTime recordingDateTimeEnd, Pageable page);
 
     Page<Recording> findAllByUserAndRecordingDateTimeBetween(User user, LocalDateTime recordingDateTimeStart, LocalDateTime recordingDateTimeEnd, Pageable page);
+
+    // -- analyzed
+
+    Page<Recording> findDistinctByUserAndPatientNameContainingIgnoreCaseAndAnalysisListIsNotNull(User user, String patientName, Pageable page);
+
+    Page<Recording> findDistinctByPatientNameContainingIgnoreCaseAndAnalysisListIsNotNull(String patientName, Pageable page);
+
+    Page<Recording> findDistinctByUserAndPatientEmailContainingIgnoreCaseAndAnalysisListIsNotNull(User user, String patientEmail, Pageable page);
+
+    Page<Recording> findDistinctByPatientEmailContainingIgnoreCaseAndAnalysisListIsNotNull(String patientEmail, Pageable page);
+
+    Page<Recording> findDistinctByRecordingDateTimeBetweenAndAnalysisListIsNotNull(LocalDateTime recordingDateTimeStart, LocalDateTime recordingDateTimeEnd, Pageable page);
+
+    Page<Recording> findDistinctByUserAndRecordingDateTimeBetweenAndAnalysisListIsNotNull(User user, LocalDateTime recordingDateTimeStart, LocalDateTime recordingDateTimeEnd, Pageable page);
+
 }

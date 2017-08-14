@@ -43,6 +43,30 @@ public interface RecordingService {
      */
     Page<Recording> findAllByRecordingDateTimeBetween(User user, String filter, Pageable page);
 
+    /**
+     *
+     * @param user if user is provided (not null), method will filter by user also
+     * @param page
+     * @return
+     */
+    Page<Recording> findAllAnalyzedByPatientName(User user, String patientName, Pageable page);
+
+    /**
+     *
+     * @param user if user is provided (not null), method will filter by user also
+     * @param page
+     * @return
+     */
+    Page<Recording> findAllAnalyzedByPatientEmail(User user, String patientName, Pageable page);
+
+    /**
+     *
+     * @param user if user is provided (not null), method will filter by user also
+     * @param page
+     * @return
+     */
+    Page<Recording> findAllAnalyzedByRecordingDateTimeBetween(User user, String filter, Pageable page);
+
     Recording save(Recording recording);
 
     Recording findOne(Long id);
