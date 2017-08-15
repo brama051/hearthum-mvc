@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Created by brama051 on 05/07/2017.
  */
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:4200", "https://hearthum-ng.herokuapp.com"})
 @Controller
 @RequestMapping("/recordings")
 public class RecordingController {
