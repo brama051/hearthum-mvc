@@ -32,31 +32,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "BASIC")
-                .antMatchers(HttpMethod.POST, "/api/**").hasAnyRole("ADMIN", "BASIC")
+                .antMatchers(HttpMethod.POST, "/api/analyses/**").hasAnyRole("ADMIN", "BASIC")
+                .antMatchers(HttpMethod.POST, "/api/**").hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PATCH, "/api/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
                 .and()
                 .httpBasic()
                 .and()
-                .csrf().disable();;
-
-        /*http.authorizeRequests()
-                .antMatchers("/resources/ne*ne*", "/login**", "/register**").permitAll()
-                .anyRequest().hasRole("ADMIN")
-                .filterSecurityInterceptorOncePerRequest(false)
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/index.html", true)
-                .permitAll()
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login.html?logout=true")
-                .permitAll(true)
-                .and()
-                .csrf().disable();*/
+                .csrf().disable();
     }
 
     @Bean
