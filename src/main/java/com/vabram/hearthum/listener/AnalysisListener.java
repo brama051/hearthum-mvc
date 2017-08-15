@@ -5,6 +5,7 @@ import com.vabram.hearthum.model.Analysis;
 import com.vabram.hearthum.model.Analyzer;
 import com.vabram.hearthum.service.AnalyzerService;
 import com.vabram.hearthum.service.EmailService;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -32,6 +33,7 @@ public class AnalysisListener {
         Analyzer analyzer = analyzerService.getAnalyzerByEmail(user.getUsername());
         // by allowing analyzer to be null, we are allowing failure of insertion of the record - it's not a bug, it's a feature
         ob.setAnalyzer(analyzer);
+        ob.setAnalysisDateTime(LocalDateTime.now());
     }
 
     @PostPersist
