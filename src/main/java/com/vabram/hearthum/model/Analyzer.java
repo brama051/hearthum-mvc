@@ -1,5 +1,8 @@
 package com.vabram.hearthum.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
 
 /**
@@ -17,7 +20,11 @@ public class Analyzer {
     private String email; // analyzer email
 
     @Column(name = "name")
-    private String name; // analyzer email
+    private String name; // analyzer name
+
+    @JsonIgnore
+    @Column(name = "password")
+    private String password; // analyzer email
 
     // --- get / set methods --------------------------------------------------
 
@@ -43,5 +50,14 @@ public class Analyzer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
+        this.password = encoder.encode(password);
     }
 }

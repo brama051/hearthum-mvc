@@ -6,9 +6,16 @@
 
     <changeSet id="20170301000000-9" author="vabramovic" context="dev">
         <insert tableName="analyzer">
+            <column name="id">0</column>
+            <column name="email">admin</column>
+            <column name="name">Admin analyzer</column>
+            <column name="password">$2a$04$b7TR.t4vQ2jr2O4IWxiFv.c0mfgViclVRyxX0SR1LnMX.HIJxVfUu</column><!--value: secret-->
+        </insert>
+        <insert tableName="analyzer">
             <column name="id">1</column>
             <column name="email">vedran.abramovic@gmail.com</column>
             <column name="name">Test Analyzer</column>
+            <column name="password">$2a$04$b7TR.t4vQ2jr2O4IWxiFv.c0mfgViclVRyxX0SR1LnMX.HIJxVfUu</column><!--value: secret-->
         </insert>
     </changeSet>
     <changeSet author="vabramovic" id="alterSequence-example">

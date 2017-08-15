@@ -18,7 +18,6 @@ public class User {
 
     // --- get / set methods --------------------------------------------------
 
-
     public Long getId() {
         return id;
     }

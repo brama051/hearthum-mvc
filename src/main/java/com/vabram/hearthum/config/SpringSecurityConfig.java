@@ -1,29 +1,46 @@
 package com.vabram.hearthum.config;
 
+import com.vabram.hearthum.service.AnalyzerLoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  *
  * Created by brama051 on 28.2.2017..
  */
 @Configuration
+@ComponentScan("com.vabram.hearthum.service")
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    /*https://auth0.com/blog/securing-spring-boot-with-jwts/
-    - securing REST API with JWT*/
+    @Autowired
+    AnalyzerLoginService analyzerLoginService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.inMemoryAuthentication()
-                .withUser("brama051").password("secret").roles("ADMIN");
+        auth.userDetailsService(analyzerLoginService).passwordEncoder(encoder());
     }
 
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "BASIC")
+                .antMatchers(HttpMethod.POST, "/api/**").hasAnyRole("ADMIN", "BASIC")
+                .antMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/api/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
+                .and()
+                .httpBasic()
+                .and()
+                .csrf().disable();;
+
         /*http.authorizeRequests()
                 .antMatchers("/resources/ne*ne*", "/login**", "/register**").permitAll()
                 .anyRequest().hasRole("ADMIN")
@@ -40,5 +57,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll(true)
                 .and()
                 .csrf().disable();*/
+    }
+
+    @Bean
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder(4);
     }
 }
