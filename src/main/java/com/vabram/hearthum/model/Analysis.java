@@ -20,6 +20,7 @@ public class Analysis {
     @Column(name = "ID")
     private Long id; // primary key
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "RECORDING_ID")
     private Recording recording; // recording that is subject of the analysis
