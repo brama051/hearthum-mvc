@@ -2,6 +2,7 @@ package com.vabram.hearthum.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vabram.hearthum.listener.AnalysisListener;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
  * Created by brama051 on 23/06/2017.
  */
 @Entity
+@EntityListeners(AnalysisListener.class)
 @Table(name = "ANALYSIS", schema = "hearthumschema")
 public class Analysis {
     @Id
@@ -18,7 +20,6 @@ public class Analysis {
     @Column(name = "ID")
     private Long id; // primary key
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "RECORDING_ID")
     private Recording recording; // recording that is subject of the analysis

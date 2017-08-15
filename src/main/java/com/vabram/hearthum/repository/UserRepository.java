@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by brama051 on 23/06/2017.
  */
-@CrossOrigin(origins = {"https://hearthum-ng.herokuapp.com", "http://localhost:4200"})
+@CrossOrigin
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
     List<User> findByEmail(String email);
