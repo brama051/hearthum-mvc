@@ -71,7 +71,8 @@ dependencies {
     compile 'joda-time:joda-time'
     compile 'org.jadira.usertype:usertype.core:5.0.0.GA'
     compile "com.querydsl:querydsl-jpa:${queryDslVersion}"
-
+    compile 'org.springframework.boot:spring-boot-starter-mail'
+    compile 'javax.servlet:jstl'
     //
     runtime "org.postgresql:postgresql:${postgresDriverVersion}"
 

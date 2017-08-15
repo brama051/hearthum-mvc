@@ -4,6 +4,7 @@ import com.vabram.hearthum.model.Analysis;
 import com.vabram.hearthum.model.Recording;
 import com.vabram.hearthum.model.User;
 import com.vabram.hearthum.service.AnalysisService;
+import com.vabram.hearthum.service.EmailService;
 import com.vabram.hearthum.service.RecordingService;
 import com.vabram.hearthum.service.UserService;
 import org.apache.log4j.Logger;
@@ -39,6 +40,9 @@ public class RecordingController {
     @Autowired
     AnalysisService analysisService;
 
+    @Autowired
+    EmailService emailService;
+
     @ResponseBody
     @GetMapping()
     public Page<Recording> getRecordingPage(@RequestHeader(value="userEmail", defaultValue = "") String userEmail,
@@ -65,9 +69,7 @@ public class RecordingController {
             direction = Sort.Direction.ASC;
         }
 
-        /*if (filter.equals("")) {
-            return recordingService.findAll(user, new PageRequest(page, size, direction, "recordingDateTime"));
-        }*/
+        emailService.sendSimpleMessage("vedran.abramovic@gmail.com", "Will it work?", "WILL IT WORK?");
 
         if (analyzed) {
             return recordingService.findAllAnalyzedByPatientEmail(user, filter, new PageRequest(page, size, direction, "patientEmail"));

@@ -1,5 +1,6 @@
 package com.vabram.hearthum.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vabram.hearthum.listener.AnalysisListener;
@@ -20,7 +21,8 @@ public class Analysis {
     @Column(name = "ID")
     private Long id; // primary key
 
-    @JsonIgnore
+    //@JsonIgnore
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "RECORDING_ID")
     private Recording recording; // recording that is subject of the analysis

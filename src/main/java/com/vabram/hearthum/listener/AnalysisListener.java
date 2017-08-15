@@ -4,6 +4,7 @@ import com.vabram.hearthum.helper.AutowireHelper;
 import com.vabram.hearthum.model.Analysis;
 import com.vabram.hearthum.model.Analyzer;
 import com.vabram.hearthum.service.AnalyzerService;
+import com.vabram.hearthum.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -19,10 +20,14 @@ public class AnalysisListener {
     @Autowired
     AnalyzerService analyzerService;
 
+    @Autowired
+    EmailService emailService;
+
+
     @PrePersist
     public void prePersist(Analysis ob) {
         AutowireHelper.autowire(this);
-        // System.out.println("Listening Analysis Pre Persist : " + ob.getId());
+
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Analyzer analyzer = analyzerService.getAnalyzerByEmail(user.getUsername());
         // by allowing analyzer to be null, we are allowing failure of insertion of the record - it's not a bug, it's a feature
@@ -31,9 +36,12 @@ public class AnalysisListener {
 
     @PostPersist
     public void postPersist(Analysis ob) {
-        // System.out.println("Listening Analysis Post Persist : " + ob.getId());
+        AutowireHelper.autowire(this);
+
         if (ob != null && ob.getAnalysisOutcome()) {
             // need to inform both patient and the user that made the recording
+            emailService.sendSimpleMessage(ob.getRecording().getPatientEmail(), "Positive diagnosis notification", "BODY");
+            emailService.sendSimpleMessage(ob.getRecording().getUser().getEmail(), "Positive diagnosis notification", "BODY");
         }
     }
 }
