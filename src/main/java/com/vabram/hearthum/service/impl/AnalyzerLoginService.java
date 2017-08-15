@@ -1,7 +1,8 @@
-package com.vabram.hearthum.service;
+package com.vabram.hearthum.service.impl;
 
 import com.vabram.hearthum.model.Analyzer;
 import com.vabram.hearthum.repository.AnalyzerRepository;
+import com.vabram.hearthum.service.AnalyzerLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -17,7 +18,7 @@ import java.util.Collection;
  * Created by brama051 on 15/08/2017.
  */
 @Service
-public class AnalyzerLoginService implements UserDetailsService {
+public class AnalyzerLoginService implements UserDetailsService, AnalyzerLogin {
 
     @Autowired
     private AnalyzerRepository analyzerRepository;

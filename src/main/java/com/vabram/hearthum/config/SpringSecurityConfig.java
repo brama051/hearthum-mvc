@@ -1,6 +1,6 @@
 package com.vabram.hearthum.config;
 
-import com.vabram.hearthum.service.AnalyzerLoginService;
+import com.vabram.hearthum.service.impl.AnalyzerLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
