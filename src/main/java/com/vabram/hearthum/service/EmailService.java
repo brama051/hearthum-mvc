@@ -1,7 +1,5 @@
 package com.vabram.hearthum.service;
 
-import org.springframework.mail.SimpleMailMessage;
-
 /**
  * Created by brama051 on 16/08/2017.
  */

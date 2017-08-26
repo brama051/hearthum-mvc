@@ -4,7 +4,6 @@ import com.vabram.hearthum.model.Analysis;
 import com.vabram.hearthum.model.Recording;
 import com.vabram.hearthum.model.User;
 import com.vabram.hearthum.service.AnalysisService;
-import com.vabram.hearthum.service.EmailService;
 import com.vabram.hearthum.service.RecordingService;
 import com.vabram.hearthum.service.UserService;
 import org.apache.log4j.Logger;
@@ -40,9 +39,6 @@ public class RecordingController {
     @Autowired
     AnalysisService analysisService;
 
-    @Autowired
-    EmailService emailService;
-
     @ResponseBody
     @GetMapping()
     public Page<Recording> getRecordingPage(@RequestHeader(value="userEmail", defaultValue = "") String userEmail,
@@ -69,7 +65,6 @@ public class RecordingController {
             direction = Sort.Direction.ASC;
         }
 
-        emailService.sendSimpleMessage("vedran.abramovic@gmail.com", "Will it work?", "WILL IT WORK?");
 
         if (analyzed) {
             return recordingService.findAllAnalyzedByPatientEmail(user, filter, new PageRequest(page, size, direction, "patientEmail"));
@@ -117,7 +112,6 @@ public class RecordingController {
                                    @RequestParam(name = "recordingLocation", defaultValue = "", required = false) String recordingLocation,
                                    @RequestParam(name = "recordingLength", defaultValue = "0", required = false) Double recordingLength,
                                    @RequestParam(name = "comment", defaultValue = "", required = false) String comment,
-                                   @RequestParam(name = "recordingDateTime", defaultValue = "", required = false) String recordingDateTime,
                                    @RequestParam(name = "content") MultipartFile recordingContent) {
         LOGGER.info("User is trying to create a recording: " + userEmail);
         User user = userService.getUserByEmail(userEmail);
@@ -149,7 +143,7 @@ public class RecordingController {
     }
 
     @ResponseBody
-    @GetMapping("{id}/analysis")
+    @GetMapping("{id}/analyses")
     public List<Analysis> getRecordingPage(@RequestHeader(value="userEmail", defaultValue = "") String userEmail,
                                            @PathVariable(name = "id") Long id) {
         LOGGER.info("User is trying to get a list of recording analysis: " + userEmail);
