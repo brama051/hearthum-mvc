@@ -41,8 +41,10 @@ public class AnalysisListener {
 
         if (ob != null && ob.getAnalysisOutcome()) {
             // need to inform both patient and the user that made the recording
-            emailService.sendSimpleMessage(ob.getRecording().getPatientEmail(), "Positive diagnosis notification", "BODY");
-            emailService.sendSimpleMessage(ob.getRecording().getUser().getEmail(), "Positive diagnosis notification", "BODY");
+            emailService.sendSimpleMessage(ob.getRecording().getPatientEmail(), "Possible diagnosis notification", "Please consider visiting a physician.");
+            emailService.sendSimpleMessage(ob.getRecording().getUser().getEmail(), "Positive diagnosis notification", "One of your recordings have received a positive diagnosis notification.\n" +
+                    "User:" + ob.getRecording().getPatientEmail() + "\n" +
+                    "Recording date: " + ob.getRecording().getRecordingDateTime());
         }
     }
 }
